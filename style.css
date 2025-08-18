@@ -410,6 +410,9 @@ input:checked + .slider:before {
 /* --- Step 5: Thank You --- */
 .thank-you-step {
     text-align: center;
+}
+
+.form-step.active.thank-you-step {
     display: flex;
     flex-direction: column;
     justify-content: center;
