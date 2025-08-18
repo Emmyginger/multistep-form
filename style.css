@@ -21,7 +21,7 @@
 
 body {
     font-family: var(--font-family);
-    background-color: var(--magnolia);
+    background-color: var(--light-blue);
     display: flex;
     justify-content: center;
     align-items: center;
