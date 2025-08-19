@@ -288,11 +288,15 @@ input:checked + .slider:before { transform: translateX(18px); }
     left: 100px;
     right: 100px;
 }
-.navigation-buttons button { padding: 15px 25px; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.3s ease; }
+.refill-btn a{
+text-decoration: none;
+color: var(--white);
+}
+.navigation-buttons button, .refill-btn { padding: 15px 25px; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.3s ease; }
 .btn-prev { background-color: transparent; color: var(--cool-gray); }
 .btn-prev:hover { color: var(--marine-blue); }
-.btn-next { background-color: var(--marine-blue); color: var(--white); }
-.btn-next:hover { background-color: hsl(213, 96%, 30%); }
+.btn-next, .refill-btn { background-color: var(--marine-blue); color: var(--white); }
+.btn-next:hover, .refill-btn:hover { background-color: hsl(213, 96%, 30%); }
 .btn-confirm { background-color: var(--purplish-blue); color: var(--white); }
 .btn-confirm:hover { background-color: hsl(243, 100%, 70%); }
 
