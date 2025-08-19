@@ -1,11 +1,11 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IzzyGaming</title>
+    <title>IzzyGaming </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -14,7 +14,7 @@
     <main class="form-container">
         <aside class="sidebar">
             <div class="sidebar-steps">
-                <div class="step active">
+                <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-info">
                         <span class="step-label">Step 1</span>
@@ -47,22 +47,25 @@
 
         <section class="form-content">
             <form id="multiStepForm">
-                <div class="form-step active" data-step="1">
+                <div class="form-step welcome-step active" data-step="0">
+                    <div class="logo">IzzyGaming</div>
+                    <h1>Welcome Aboard!</h1>
+                    <p>Let's get you set up with the perfect plan for your gaming adventures.</p>
+                </div>
+
+                <div class="form-step" data-step="1">
                     <h1>Personal info</h1>
                     <p>Please provide your name, email address, and phone number.</p>
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <span class="error-message">This field is required</span>
+                        <label for="name">Name<span class="error-message">This field is required</span></label>
                         <input type="text" id="name" placeholder="e.g. Stephen King" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <span class="error-message">This field is required</span>
+                        <label for="email">Email Address<span class="error-message">This field is required</span></label>
                         <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <span class="error-message">This field is required</span>
+                        <label for="phone">Phone Number<span class="error-message">This field is required</span></label>
                         <input type="tel" id="phone" placeholder="e.g. +1 234 567 890" required>
                     </div>
                 </div>
@@ -71,7 +74,7 @@
                     <h1>Select your plan</h1>
                     <p>You have the option of monthly or yearly billing.</p>
                     <div class="plan-options">
-                        <div class="plan-card" data-plan="Arcade" data-price="9">
+                        <div class="plan-card" data-plan="Arcade">
                             <img src="https://img.icons8.com/fluency/48/controller.png" alt="Arcade icon">
                             <div class="plan-details">
                                 <h3>Arcade</h3>
@@ -79,7 +82,7 @@
                                 <span class="yearly-promo">2 months free</span>
                             </div>
                         </div>
-                        <div class="plan-card" data-plan="Advanced" data-price="12">
+                        <div class="plan-card" data-plan="Advanced">
                             <img src="https://img.icons8.com/fluency/48/ps-controller.png" alt="Advanced icon">
                             <div class="plan-details">
                                 <h3>Advanced</h3>
@@ -87,7 +90,7 @@
                                 <span class="yearly-promo">2 months free</span>
                             </div>
                         </div>
-                         <div class="plan-card" data-plan="Pro" data-price="15">
+                         <div class="plan-card" data-plan="Pro">
                             <img src="https://img.icons8.com/fluency/48/nintendo-switch-pro-controller.png" alt="Pro icon">
                             <div class="plan-details">
                                 <h3>Pro</h3>
@@ -110,7 +113,7 @@
                     <h1>Pick add-ons</h1>
                     <p>Add-ons help enhance your gaming experience.</p>
                     <div class="addon-options">
-                        <div class="addon-card" data-addon="Online service" data-price="1">
+                        <div class="addon-card" data-addon="Online service">
                             <input type="checkbox" id="online-service">
                             <div class="addon-details">
                                 <h3>Online service</h3>
@@ -118,7 +121,7 @@
                             </div>
                             <p class="addon-price">+$1/mo</p>
                         </div>
-                        <div class="addon-card" data-addon="Larger storage" data-price="2">
+                        <div class="addon-card" data-addon="Larger storage">
                              <input type="checkbox" id="larger-storage">
                             <div class="addon-details">
                                 <h3>Larger storage</h3>
@@ -126,7 +129,7 @@
                             </div>
                             <p class="addon-price">+$2/mo</p>
                         </div>
-                        <div class="addon-card" data-addon="Customizable profile" data-price="2">
+                        <div class="addon-card" data-addon="Customizable profile">
                              <input type="checkbox" id="custom-profile">
                             <div class="addon-details">
                                 <h3>Customizable profile</h3>
@@ -150,13 +153,12 @@
                         <h2 id="summary-total-price"></h2>
                     </div>
                 </div>
-                
+
                  <div class="form-step thank-you-step" data-step="5">
                     <img src="https://img.icons8.com/color/96/checked--v1.png" alt="Checkmark icon">
                     <h1>Thank you!</h1>
-                    <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com.</p>
+                    <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@izzygaming.com.</p>
                 </div>
-
             </form>
             
             <div class="navigation-buttons">

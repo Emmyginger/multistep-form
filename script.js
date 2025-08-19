@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const formContainer = document.querySelector('.form-container');
     const steps = document.querySelectorAll('.form-step');
     const sidebarSteps = document.querySelectorAll('.sidebar .step');
     const prevBtn = document.querySelector('.btn-prev');
     const nextBtn = document.querySelector('.btn-next');
     const confirmBtn = document.querySelector('.btn-confirm');
-    const form = document.getElementById('multiStepForm');
     const navButtons = document.querySelector('.navigation-buttons');
 
-    let currentStep = 1;
+    let currentStep = 0; // Start at welcome screen
     let selectedPlan = null;
-    let billingCycle = 'monthly'; // 'monthly' or 'yearly'
+    let billingCycle = 'monthly';
     let addons = [];
 
     const planPrices = {
@@ -25,19 +25,42 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateStepVisibility = () => {
+        formContainer.classList.toggle('form-started', currentStep > 0);
+
         steps.forEach(step => {
             step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
         });
 
-        sidebarSteps.forEach((step, index) => {
-            step.classList.toggle('active', index + 1 === currentStep);
-        });
-
-        prevBtn.style.display = currentStep > 1 && currentStep < 5 ? 'block' : 'none';
-        nextBtn.style.display = currentStep < 4 ? 'block' : 'none';
-        confirmBtn.style.display = currentStep === 4 ? 'block' : 'none';
-
-        if (currentStep === 5) {
+        if (currentStep > 0 && currentStep <= 4) {
+             sidebarSteps.forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.toggle('active', stepNumber === currentStep);
+            });
+        } else if (currentStep === 5) {
+             sidebarSteps.forEach((step, index) => {
+                step.classList.toggle('active', index === 3); // Keep step 4 active
+            });
+        }
+        
+        // --- CORRECTED Button Visibility Logic ---
+        if (currentStep === 0) {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'block';
+            confirmBtn.style.display = 'none';
+            navButtons.style.justifyContent = 'flex-end'; // Align single button to the right
+            nextBtn.textContent = 'Proceed to Form';
+        } else if (currentStep < 4) {
+            prevBtn.style.display = currentStep > 1 ? 'block' : 'none';
+            nextBtn.style.display = 'block';
+            confirmBtn.style.display = 'none';
+            navButtons.style.justifyContent = 'space-between';
+            nextBtn.textContent = 'Next Step';
+        } else if (currentStep === 4) {
+            prevBtn.style.display = 'block';
+            nextBtn.style.display = 'none';
+            confirmBtn.style.display = 'block';
+            navButtons.style.justifyContent = 'space-between';
+        } else {
             navButtons.style.display = 'none';
         }
     };
@@ -51,9 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!nameInput.value.trim()) {
             showError(nameInput, 'This field is required');
             isValid = false;
-        } else {
-            clearError(nameInput);
-        }
+        } else { clearError(nameInput); }
         
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailInput.value.trim()) {
@@ -62,31 +83,29 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (!emailRegex.test(emailInput.value)) {
             showError(emailInput, 'Please enter a valid email');
              isValid = false;
-        } else {
-            clearError(emailInput);
-        }
+        } else { clearError(emailInput); }
 
         if (!phoneInput.value.trim()) {
             showError(phoneInput, 'This field is required');
             isValid = false;
-        } else {
-            clearError(phoneInput);
-        }
+        } else { clearError(phoneInput); }
         
         return isValid;
     };
 
     const showError = (input, message) => {
         const formGroup = input.parentElement;
-        formGroup.querySelector('label').classList.add('error');
-        const errorMsg = formGroup.querySelector('.error-message');
+        const label = formGroup.querySelector('label');
+        label.classList.add('error');
+        const errorMsg = label.querySelector('.error-message');
         errorMsg.textContent = message;
         input.classList.add('error');
     };
 
     const clearError = (input) => {
         const formGroup = input.parentElement;
-        formGroup.querySelector('label').classList.remove('error');
+        const label = formGroup.querySelector('label');
+        label.classList.remove('error');
         input.classList.remove('error');
     };
 
@@ -136,12 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
     
-    // Event Listeners
     nextBtn.addEventListener('click', () => {
         let isValid = false;
-        if (currentStep === 1) isValid = validateStep1();
-        if (currentStep === 2) isValid = validateStep2();
-        if (currentStep === 3) isValid = true;
+        if (currentStep === 0) isValid = true;
+        else if (currentStep === 1) isValid = validateStep1();
+        else if (currentStep === 2) isValid = validateStep2();
+        else isValid = true;
         
         if (isValid) {
             currentStep++;
@@ -162,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateStepVisibility();
     });
 
-    // Step 2: Plan Selection Logic
     document.querySelectorAll('.plan-card').forEach(card => {
         card.addEventListener('click', () => {
             document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
@@ -177,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.monthly').classList.toggle('active', !billingToggle.checked);
         document.querySelector('.yearly').classList.toggle('active', billingToggle.checked);
         
-        // Update prices display
         document.querySelectorAll('.yearly-promo').forEach(promo => {
             promo.style.display = billingToggle.checked ? 'block' : 'none';
         });
@@ -197,11 +214,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Step 3: Add-on Selection Logic
     document.querySelectorAll('.addon-card').forEach(card => {
-        card.addEventListener('click', () => {
+        card.addEventListener('click', (e) => {
             const checkbox = card.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
+            if (e.target.type !== 'checkbox') {
+                checkbox.checked = !checkbox.checked;
+            }
             card.classList.toggle('selected', checkbox.checked);
             
             const addonName = card.dataset.addon;
