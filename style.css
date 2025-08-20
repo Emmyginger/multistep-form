@@ -1,0 +1,327 @@
+/* ============================================= */
+/* --- 1. Global Styles & Variables          --- */
+/* ============================================= */
+:root {
+    --marine-blue: hsl(213, 96%, 18%);
+    --purplish-blue: hsl(243, 100%, 62%);
+    --pastel-blue: hsl(228, 100%, 84%);
+    --light-blue: hsl(206, 94%, 87%);
+    --strawberry-red: hsl(354, 84%, 57%);
+    --cool-gray: hsl(231, 11%, 63%);
+    --light-gray: hsl(229, 24%, 87%);
+    --magnolia: hsl(217, 100%, 97%);
+    --alabaster: hsl(231, 100%, 99%);
+    --white: hsl(0, 0%, 100%);
+    --font-family: 'Ubuntu', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--light-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ============================================= */
+/* --- 2. Main Layout & Welcome Transition   --- */
+/* ============================================= */
+.form-container {
+    display: flex;
+    width: 550px; /* Start smaller for welcome screen */
+    height: 600px;
+    background-color: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    padding: 16px;
+    transition: width 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.form-container.form-started {
+    width: 940px; /* Expand to full width */
+}
+
+.sidebar {
+    background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=647&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    width: 274px;
+    padding: 40px 32px;
+    flex-shrink: 0;
+    transform: translateX(-300px);
+    opacity: 0;
+    transition: transform 0.6s ease-in-out, opacity 0.5s ease;
+}
+
+.form-container.form-started .sidebar {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.form-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 100px;
+    position: relative;
+}
+
+/* ============================================= */
+/* --- 3. Sidebar Step Indicators            --- */
+/* ============================================= */
+.sidebar-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.step-number {
+    width: 33px;
+    height: 33px;
+    border: 1px solid var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--light-blue);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.step.active .step-number {
+    background-color: var(--light-blue);
+    color: var(--marine-blue);
+    border-color: var(--light-blue);
+}
+
+.step-info {
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+}
+
+.step-label {
+    color: var(--light-blue);
+    font-size: 12px;
+}
+
+.step-title {
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 14px;
+}
+
+/* ============================================= */
+/* --- 4. Form Steps (General)               --- */
+/* ============================================= */
+#multiStepForm {
+    height: 100%; 
+}
+
+.form-step {
+    display: none;
+    height: 100%;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-step h1 {
+    color: var(--marine-blue);
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.form-step p {
+    color: var(--cool-gray);
+    margin-bottom: 35px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.form-group label {
+    color: var(--marine-blue);
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-group .error-message {
+    color: var(--strawberry-red);
+    font-size: 12px;
+    font-weight: 700;
+    display: none;
+    float: right;
+}
+
+.form-group input.error { 
+    border-color: var(--strawberry-red); 
+}
+
+.form-group label.error .error-message { 
+    display: inline; 
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--purplish-blue);
+}
+
+/* ============================================= */
+/* --- 5. Individual Step Styles             --- */
+/* ============================================= */
+
+/* --- Step 0: Welcome --- */
+.welcome-step.active {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.welcome-step .logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--purplish-blue);
+    border: 2px solid var(--light-gray);
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+/* --- Step 2: Plan Selection --- */
+.plan-options { display: flex; gap: 18px; margin-bottom: 32px; }
+.plan-card { flex: 1; border: 1px solid var(--light-gray); border-radius: 8px; padding: 20px 16px; cursor: pointer; transition: all 0.3s ease; }
+.plan-card:hover { border-color: var(--purplish-blue); }
+.plan-card.selected { border-color: var(--purplish-blue); background-color: var(--alabaster); }
+.plan-card img { margin-bottom: 40px; }
+.plan-details h3 { color: var(--marine-blue); font-size: 16px; }
+.plan-details .plan-price { color: var(--cool-gray); font-size: 14px; margin-bottom: 6px; }
+.yearly-promo { font-size: 12px; color: var(--marine-blue); font-weight: 500; display: none; }
+.billing-cycle { display: flex; justify-content: center; align-items: center; gap: 24px; background-color: var(--magnolia); padding: 14px; border-radius: 8px; }
+.billing-cycle span { font-weight: 700; color: var(--cool-gray); transition: color 0.3s ease; }
+.billing-cycle span.active { color: var(--marine-blue); }
+.switch { position: relative; display: inline-block; width: 38px; height: 20px; }
+.switch input { display: none; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--marine-blue); transition: 0.4s; border-radius: 20px; }
+.slider:before { position: absolute; content: ""; height: 12px; width: 12px; left: 4px; bottom: 4px; background-color: white; transition: 0.4s; border-radius: 50%; }
+input:checked + .slider:before { transform: translateX(18px); }
+
+/* --- Step 3: Add-ons --- */
+.addon-options { display: flex; flex-direction: column; gap: 16px; }
+.addon-card { display: flex; align-items: center; border: 1px solid var(--light-gray); border-radius: 8px; padding: 20px; cursor: pointer; transition: all 0.3s ease; }
+.addon-card:hover { border-color: var(--purplish-blue); }
+.addon-card.selected { border-color: var(--purplish-blue); background-color: var(--alabaster); }
+.addon-card input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--purplish-blue); margin-right: 24px; }
+.addon-details { flex-grow: 1; }
+.addon-details h3 { color: var(--marine-blue); font-size: 16px; }
+.addon-details p { color: var(--cool-gray); font-size: 14px; margin-bottom: 0; }
+.addon-price { color: var(--purplish-blue); font-size: 14px; }
+
+/* --- Step 4: Summary --- */
+.summary-box { background-color: var(--alabaster); padding: 24px; border-radius: 8px; }
+#summary-plan { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+#summary-plan div h3 { color: var(--marine-blue); font-size: 16px; }
+#summary-plan div a { color: var(--cool-gray); font-size: 14px; text-decoration: underline; }
+#summary-plan div a:hover { color: var(--purplish-blue); }
+#summary-plan p { color: var(--marine-blue); font-size: 16px; font-weight: 700; margin-bottom: 0; }
+.summary-box hr { border: none; height: 1px; background-color: var(--light-gray); margin-bottom: 16px; }
+#summary-addons .summary-addon-item { display: flex; justify-content: space-between; margin-bottom: 16px; }
+#summary-addons .summary-addon-item p { color: var(--cool-gray); font-size: 14px; margin-bottom: 0; }
+#summary-addons .summary-addon-item span { color: var(--marine-blue); }
+.summary-total { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding: 0 24px; }
+.summary-total p { color: var(--cool-gray); font-size: 14px; margin: 0; }
+.summary-total h2 { color: var(--purplish-blue); font-size: 20px; font-weight: 700; }
+
+/* --- Step 5: Thank You --- */
+.thank-you-step { text-align: center; }
+.form-step.active.thank-you-step { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.thank-you-step img { margin-bottom: 32px; }
+.thank-you-step p { max-width: 450px; line-height: 1.6; }
+
+/* ============================================= */
+/* --- 6. Navigation Buttons                 --- */
+/* ============================================= */
+.navigation-buttons { 
+    display: flex; 
+    align-items: center; 
+    position: absolute;
+    bottom: 40px;
+    left: 100px;
+    right: 100px;
+}
+.refill-btn a{
+text-decoration: none;
+color: var(--white);
+}
+.navigation-buttons button, .refill-btn { padding: 15px 25px; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; transition: background-color 0.3s ease; }
+.btn-prev { background-color: transparent; color: var(--cool-gray); }
+.btn-prev:hover { color: var(--marine-blue); }
+.btn-next, .refill-btn { background-color: var(--marine-blue); color: var(--white); }
+.btn-next:hover, .refill-btn:hover { background-color: hsl(213, 96%, 30%); }
+.btn-confirm { background-color: var(--purplish-blue); color: var(--white); }
+.btn-confirm:hover { background-color: hsl(243, 100%, 70%); }
+
+/* ============================================= */
+/* --- 7. Responsive Design                  --- */
+/* ============================================= */
+@media (min-width:970px) {
+    .welcome-step.active{
+        margin-left: -250px;
+    }
+}
+@media (max-width: 960px) {
+    body { align-items: flex-start; }
+    .form-container, .form-container.form-started { width: 100%; height: auto; min-height: 100vh; background-color: transparent; padding: 0; box-shadow: none; flex-direction: column; }
+    .sidebar { width: 100%; height: 172px; border-radius: 0; background-image: url('https://images.unsplash.com/photo-1509198397868-475647b2a1e5?q=80&w=647&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-size: cover; padding: 32px 0; transform: none !important; opacity: 1 !important; flex-direction: row; justify-content: center; }
+    .form-container:not(.form-started) .sidebar { display: none; }
+    .sidebar-steps { flex-direction: row; justify-content: center; gap: 16px; }
+    .step-info { display: none; }
+    .form-content { width: calc(100% - 32px); margin: -75px auto 0; background-color: var(--white); border-radius: 10px; padding: 32px 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .form-container:not(.form-started) .form-content { margin-top: 20px; }
+    .form-step { padding-bottom: 100px; } /* Space for fixed navigation */
+    .navigation-buttons { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; background-color: var(--white); padding: 16px; margin: 0; }
+}
+@media (max-width: 480px) {
+    .plan-options { flex-direction: column; }
+    .plan-card { display: flex; align-items: center; gap: 14px; }
+    .plan-card img { margin-bottom: 0; }
+}

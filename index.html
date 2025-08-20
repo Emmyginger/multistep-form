@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IzzyGaming </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="form-container">
+        <aside class="sidebar">
+            <div class="sidebar-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-info">
+                        <span class="step-label">Step 1</span>
+                        <span class="step-title">Your info</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-info">
+                        <span class="step-label">Step 2</span>
+                        <span class="step-title">Select plan</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-info">
+                        <span class="step-label">Step 3</span>
+                        <span class="step-title">Add-ons</span>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-info">
+                        <span class="step-label">Step 4</span>
+                        <span class="step-title">Summary</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="form-content">
+            <form id="multiStepForm">
+                <div class="form-step welcome-step active" id="welcome-page" data-step="0">
+                    <div class="logo">IzzyGaming</div>
+                    <h1>Welcome Aboard!</h1>
+                    <p>Let's get you set up with the perfect plan for your gaming adventures.</p>
+                </div>
+
+                <div class="form-step" data-step="1">
+                    <h1>Personal info</h1>
+                    <p>Please provide your name, email address, and phone number.</p>
+                    <div class="form-group">
+                        <label for="name">Name<span class="error-message">This field is required</span></label>
+                        <input type="text" id="name" placeholder="e.g. Stephen King" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address<span class="error-message">This field is required</span></label>
+                        <input type="email" id="email" placeholder="e.g. stephenking@lorem.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number<span class="error-message">This field is required</span></label>
+                        <input type="tel" id="phone" placeholder="e.g. +1 234 567 890" required>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="2">
+                    <h1>Select your plan</h1>
+                    <p>You have the option of monthly or yearly billing.</p>
+                    <div class="plan-options">
+                        <div class="plan-card" data-plan="Arcade">
+                            <img src="https://img.icons8.com/fluency/48/controller.png" alt="Arcade icon">
+                            <div class="plan-details">
+                                <h3>Arcade</h3>
+                                <p class="plan-price">$9/mo</p>
+                                <span class="yearly-promo">2 months free</span>
+                            </div>
+                        </div>
+                        <div class="plan-card" data-plan="Advanced">
+                            <img src="https://img.icons8.com/fluency/48/ps-controller.png" alt="Advanced icon">
+                            <div class="plan-details">
+                                <h3>Advanced</h3>
+                                <p class="plan-price">$12/mo</p>
+                                <span class="yearly-promo">2 months free</span>
+                            </div>
+                        </div>
+                         <div class="plan-card" data-plan="Pro">
+                            <img src="https://img.icons8.com/fluency/48/nintendo-switch-pro-controller.png" alt="Pro icon">
+                            <div class="plan-details">
+                                <h3>Pro</h3>
+                                <p class="plan-price">$15/mo</p>
+                                <span class="yearly-promo">2 months free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="billing-cycle">
+                        <span class="monthly active">Monthly</span>
+                        <label class="switch">
+                            <input type="checkbox" id="billingToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="yearly">Yearly</span>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="3">
+                    <h1>Pick add-ons</h1>
+                    <p>Add-ons help enhance your gaming experience.</p>
+                    <div class="addon-options">
+                        <div class="addon-card" data-addon="Online service">
+                            <input type="checkbox" id="online-service">
+                            <div class="addon-details">
+                                <h3>Online service</h3>
+                                <p>Access to multiplayer games</p>
+                            </div>
+                            <p class="addon-price">+$1/mo</p>
+                        </div>
+                        <div class="addon-card" data-addon="Larger storage">
+                             <input type="checkbox" id="larger-storage">
+                            <div class="addon-details">
+                                <h3>Larger storage</h3>
+                                <p>Extra 1TB of cloud save</p>
+                            </div>
+                            <p class="addon-price">+$2/mo</p>
+                        </div>
+                        <div class="addon-card" data-addon="Customizable profile">
+                             <input type="checkbox" id="custom-profile">
+                            <div class="addon-details">
+                                <h3>Customizable profile</h3>
+                                <p>Custom theme on your profile</p>
+                            </div>
+                            <p class="addon-price">+$2/mo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-step" data-step="4">
+                    <h1>Finishing up</h1>
+                    <p>Double-check everything looks OK before confirming.</p>
+                    <div class="summary-box">
+                        <div id="summary-plan"></div>
+                        <hr>
+                        <div id="summary-addons"></div>
+                    </div>
+                    <div class="summary-total">
+                        <p>Total (per <span id="summary-billing-cycle">month</span>)</p>
+                        <h2 id="summary-total-price"></h2>
+                    </div>
+                </div>
+
+                 <div class="form-step thank-you-step" data-step="5">
+                    <img src="https://img.icons8.com/color/96/checked--v1.png" alt="Checkmark icon">
+                    <h1>Thank you!</h1>
+                    <p>Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@izzygaming.com.</p>
+                    <button class="refill-btn"><a href="index.html">Refill Form</a></button>
+                </div>
+            </form>
+            
+            <div class="navigation-buttons">
+                <button type="button" class="btn-prev">Go Back</button>
+                <button type="button" class="btn-next">Next Step</button>
+                <button type="button" class="btn-confirm">Confirm</button>
+            </div>
+        </section>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
